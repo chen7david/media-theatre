@@ -5,8 +5,12 @@ import store from './store'
 import vuetify from './plugins/vuetify';
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
+import http from './plugins/http'
 
 Vue.config.productionTip = false
+Vue.prototype.$http = http({
+  baseURL: 'http://aox.hopto.org:8555'
+})
 
 new Vue({
   router,
