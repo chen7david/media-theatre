@@ -119,6 +119,7 @@ export default {
       },
       $route(to){
         this.page = to.name.toLowerCase()
+        this.phrase = ''
       }
     },
 }
