@@ -45,7 +45,6 @@
             dark
         >
             <v-app-bar-nav-icon @click="drawer = !drawer"/>
-            {{page}}
             <v-text-field
                 v-if="isSearchable"
                 class="mt-6 mx-3"
@@ -122,5 +121,8 @@ export default {
         this.phrase = ''
       }
     },
+    created(){
+        this.page = this.$route.name.toLowerCase()
+    }
 }
 </script>
