@@ -66,11 +66,10 @@ export default {
     await this.load(this.getMovies)
     this.$root.$on('search-shows', (e) => {
           this.filter = e ? this.filter = e.toLowerCase() : null
-          console.log({e, name:'shows'})
     })
   },
   beforeDestroy() {
-    this.$root.$off('search-movies')
+    this.$root.$off('search-shows')
 },
 }
 </script>
