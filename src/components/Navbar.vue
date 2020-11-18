@@ -49,10 +49,14 @@
             class="mt-6 mx-3"
                 light
                 solo
+                filled
+                rounded
                 append-inner-icon="mdi-movie"
                 placeholder="Search..."
                 dense
+                v-model="phrase"
             >
+            {{phrase}}
             </v-text-field>
             <v-spacer></v-spacer>
             <v-btn tile v-if="false" router to="/login">Login</v-btn>
@@ -68,6 +72,7 @@ export default {
         isLoading: false,
         drawer: false,
         dark: true,
+        phrase: '',
         links: [
             {
                 name: 'Movies',
@@ -92,10 +97,17 @@ export default {
         ]
     }),
     methods: {
+        lookFor(){
+            console.log()
+        }
     },
     watch: {
       dark(dark){
         this.$vuetify.theme.dark = dark
+      },
+      phrase(phrase){
+          const name = this.$router.currentRoute.name.toLowerCase()
+          this.$emit(`search-${name}`,phrase)
       }
     }
 }
