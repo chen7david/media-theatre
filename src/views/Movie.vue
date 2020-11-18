@@ -1,25 +1,41 @@
 <template>
-    <v-container>
-        <media-player
-            baseURL="http://aox.hopto.org:9000/movies"
-            :videos="item.videos"
-            :subtitles="item.subtitles"
-            :poster="`http://aox.hopto.org:8000/image/w780`+item.backdrop_path"
-            aspect="16/9"
-            width="500"        
-        />
+    <v-container fill-height>
+        <v-row>
+          <v-col cols="12">
+            <v-row justify="center"> 
+                <v-col align="center" lg="9" sm="12" xs="12">
+                  <media-player
+                      baseURL="http://aox.hopto.org:9000/movies"
+                      :videos="item.videos"
+                      :subtitles="item.subtitles"
+                      :poster="`http://aox.hopto.org:8000/image/w1280`+item.backdrop_path"
+                      aspect="16/9"
+                      :width="size"        
+                  />
+                  <Details
+                    :width="size"
+                    :name="item.title"
+                    :date="item.release_date"
+                    :overview="item.overview"
+                  />
+                </v-col>
+              </v-row>
+          </v-col>
+        </v-row>
     </v-container>
 </template>
 
 <script>
 import MediaPlayer from './../components/MediaPlayer';
+import Details from './../components/Details';
 
 
 export default {
   name: 'Movies',
 
   components: {
-    'media-player' : MediaPlayer
+    'media-player' : MediaPlayer,
+    Details
   },
 
   props: {
@@ -28,20 +44,30 @@ export default {
 
   data: () => ({
     item: {},
+    windowWidth: null
   }),
 
   computed: {
-
+    size(){
+      return this.windowWidth * 0.7
+    }
   },
   methods: {
     async getMovie(){
       const  { data }  = await this.$http.get(`/movies/${this.id}`)
       this.item = data
+    },
+
+    setScreen(){
+      this.windowWidth = this.$vuetify.breakpoint.width
     }
   },
-
   async mounted(){
-     await this.getMovie()
+    await this.getMovie()
+    this.setScreen()
+  },
+  created(){
+    window.addEventListener('resize',this.setScreen)
   }
 };
 </script>

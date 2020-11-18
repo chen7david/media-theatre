@@ -2,11 +2,13 @@
     <v-sheet
         :width="width"
         :height="height"
+        color="black"
     >
         <video
             v-if="videos && videos[0]" 
+            controls 
+            controlsList="nodownload"
             crossorigin="anonymous"
-            controls
             :key="videos[0].src" 
             :poster="poster"  
             :width="width" 
