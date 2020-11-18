@@ -54,6 +54,7 @@
                 append-inner-icon="mdi-movie"
                 placeholder="Search..."
                 dense
+                clearable
                 v-model="phrase"
             >
             {{phrase}}
@@ -107,7 +108,7 @@ export default {
       },
       phrase(phrase){
           const name = this.$router.currentRoute.name.toLowerCase()
-          this.$emit(`search-${name}`,phrase)
+          this.$root.$emit(`search-${name}`,phrase)
       }
     }
 }

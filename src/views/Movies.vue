@@ -15,7 +15,7 @@
           </v-row>
          <v-row v-show="!isLoading" justify="space-around" fill-height>
             <Poster
-                v-for="item of movies"
+                v-for="item of items()"
                 :key="item.id"
                 :src="`http://aox.hopto.org:8000/image/w342`+item.poster_path"
                 :name="item.title"
@@ -23,7 +23,7 @@
                 aspect="2/3"
                 width="130"
                 :to="`/movie/`+item.id"
-            />
+            /> 
           </v-row>
       </v-col>
     </v-row>
@@ -37,7 +37,8 @@ export default {
   name: 'Home',
   data: () => ({
     isLoading: false,
-    movies: []
+    movies: [],
+    filter: null
   }),
   components: {
     Poster
@@ -56,10 +57,20 @@ export default {
         return dateB - dateA
       }
       this.movies = data.sort(compare)
+    },
+    items(){
+      return this.filter ? this.movies.filter(m => m.title.toLowerCase().includes(this.filter)) : this.movies
     }
   },
   async mounted(){
     await this.load(this.getMovies)
-  }
+    this.$root.$on('search-movies', (e) => {
+          this.filter = e ? this.filter = e.toLowerCase() : null
+          console.log({e, name:'movies'})
+    })
+  },
+  beforeDestroy() {
+    this.$root.$off('search-movies')
+},
 }
 </script>
