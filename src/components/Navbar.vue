@@ -45,8 +45,17 @@
             dark
         >
             <v-app-bar-nav-icon @click="drawer = !drawer"/>
+            <v-text-field
+            class="mt-6 mx-3"
+                light
+                solo
+                append-inner-icon="mdi-movie"
+                placeholder="Search..."
+                dense
+            >
+            </v-text-field>
             <v-spacer></v-spacer>
-            <v-btn tile router to="/login">Login</v-btn>
+            <v-btn tile v-if="false" router to="/login">Login</v-btn>
             <v-btn tile router to="/register">Register</v-btn>
         </v-app-bar>
     </nav>
