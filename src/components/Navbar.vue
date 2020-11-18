@@ -121,7 +121,7 @@ export default {
         this.phrase = ''
       }
     },
-    created(){
+    mountd(){
         this.page = this.$route.name.toLowerCase()
     }
 }
