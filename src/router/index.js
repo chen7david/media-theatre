@@ -19,7 +19,18 @@ const routes = [
     name: 'Movie',
     component: () => import('../views/Movie.vue'),
     props: true
-  }
+  },
+  {
+    path: '/shows',
+    name: 'Shows',
+    component: () => import('../views/Shows.vue'),
+  },
+  {
+    path: '/show/:id',
+    name: 'Show',
+    component: () => import('../views/Show.vue'),
+    props: true
+  },
 ]
 
 const router = new VueRouter({

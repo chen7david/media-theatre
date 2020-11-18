@@ -45,8 +45,10 @@
             dark
         >
             <v-app-bar-nav-icon @click="drawer = !drawer"/>
+            {{page}}
             <v-text-field
-            class="mt-6 mx-3"
+                v-if="isSearchable"
+                class="mt-6 mx-3"
                 light
                 solo
                 filled
@@ -57,7 +59,6 @@
                 clearable
                 v-model="phrase"
             >
-            {{phrase}}
             </v-text-field>
             <v-spacer></v-spacer>
             <v-btn tile v-if="false" router to="/login">Login</v-btn>
@@ -73,6 +74,8 @@ export default {
         isLoading: false,
         drawer: false,
         dark: true,
+        page: null,
+        searchable: ['movies', 'shows'],
         phrase: '',
         links: [
             {
@@ -97,6 +100,11 @@ export default {
             },
         ]
     }),
+    computed:{
+        isSearchable(){
+            return this.searchable.includes(this.page)
+        }
+    },
     methods: {
         lookFor(){
             console.log()
@@ -107,9 +115,11 @@ export default {
         this.$vuetify.theme.dark = dark
       },
       phrase(phrase){
-          const name = this.$router.currentRoute.name.toLowerCase()
-          this.$root.$emit(`search-${name}`,phrase)
+          this.$root.$emit(`search-${this.page}`,phrase)
+      },
+      $route(to){
+        this.page = to.name.toLowerCase()
       }
-    }
+    },
 }
 </script>
