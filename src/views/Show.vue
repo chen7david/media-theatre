@@ -1,76 +1,84 @@
 <template>
-  <v-container>
-    <v-row fill-height>
-      <v-col cols="12">
-        <v-row v-show="isLoading" class="fill-height ma-0" align="center" justify="center">
-            <div class="text-center">
-              <v-overlay>
-                <v-progress-circular
-                  indeterminate
-                  size="80"
-                  color="orange"
-                ></v-progress-circular>
-              </v-overlay>
-            </div>
-          </v-row>
-         <v-row v-show="!isLoading" justify="space-around" fill-height>
-            <Poster
-                v-for="item of items()"
-                :key="item.id"
-                :src="`http://aox.hopto.org:8000/image/w342`+item.poster_path"
-                :name="item.title"
-                :date="item.release_date"
-                aspect="2/3"
-                width="130"
-                :to="`/movie/`+item.id"
-            /> 
-          </v-row>
-      </v-col>
-    </v-row>
-  </v-container>
+    <v-container fill-height>
+        <v-row>
+          <v-col cols="12">
+            <v-row justify="center"> 
+                <v-col align="center" lg="9" sm="12" xs="12">
+                  <Details
+                    :width="size"
+                    :name=" episode.name || item.name"
+                    :date="item.first_air_date"
+                    
+                    textlimit="0"
+                  />
+                  <media-player
+                      :baseURL="$config.api.file+`/shows`"
+                      :videos="episode.videos"
+                      :subtitles="episode.subtitles"
+                      :poster="$config.api.meta+`/image/w1280`+item.backdrop_path"
+                      aspect="16/9"
+                      :width="size"        
+                  />
+                  <SeasonsTable @selected="setEpisode" align="center" :item="item" :width="size"/>
+                </v-col>
+              </v-row>
+          </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
-import Poster from '@/components/Poster.vue'
+import MediaPlayer from './../components/MediaPlayer';
+import Details from './../components/Details';
+import SeasonsTable from './../components/SeasonsTable';
+
 
 export default {
-  name: 'Home',
-  data: () => ({
-    isLoading: false,
-    movies: [],
-    filter: null
-  }),
+  name: 'Movies',
+
   components: {
-    Poster
-  }, 
+    'media-player' : MediaPlayer,
+    Details,
+    SeasonsTable
+  },
+
+  props: {
+    id: null
+  },
+
+  data: () => ({
+    item: {},
+    windowWidth: null,
+    episode: {}
+  }),
+
+  computed: {
+    size(){
+      return this.windowWidth * 0.8
+    }
+  },
   methods: {
-    async load(func, params = {}){
-      this.isLoading = true
-      await func(params)
-      this.isLoading = false
+    async getShows(){
+      const  { data }  = await this.$http.get(`/shows/${this.id}`)
+      const seasons = data.seasons.filter(s => s.episodes.length > 0)
+      this.episode = seasons[0].episodes[0]
+      data.seasons = seasons
+      this.item = data
     },
-    async getMovies(){
-      const { data } = await this.$http.get('/movies')
-      function compare(a,b){
-        const dateA = new Date(a.release_date)
-        const dateB = new Date(b.release_date)
-        return dateB - dateA
-      }
-      this.movies = data.sort(compare)
+ 
+    setScreen(){
+      this.windowWidth = this.$vuetify.breakpoint.width
     },
-    items(){
-      return this.filter ? this.movies.filter(m => m.title.toLowerCase().includes(this.filter)) : this.movies
+    setEpisode(ep){
+      this.episode = ep
     }
   },
   async mounted(){
-    await this.load(this.getMovies)
-    this.$root.$on('search-movies', (e) => {
-          this.filter = e ? this.filter = e.toLowerCase() : null
-          console.log({e, name:'movies'})
-    })
+    await this.getShows()
+    this.setScreen()
   },
-  beforeDestroy() {
-    this.$root.$off('search-movies')
-},
-}
+  created(){
+    window.addEventListener('resize',this.setScreen)
+  }
+};
 </script>

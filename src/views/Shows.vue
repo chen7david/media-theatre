@@ -21,8 +21,8 @@
                 :name="item.name"
                 :date="item.first_air_date"
                 aspect="2/3"
-                width="130"
-                :to="`/movie/`+item.id"
+                width="132"
+                :to="`/show/`+item.id"
             /> 
           </v-row>
       </v-col>

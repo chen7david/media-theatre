@@ -17,6 +17,7 @@
                     :name="item.title"
                     :date="item.release_date"
                     :overview="item.overview"
+                    textlimit="200"
                   />
                 </v-col>
               </v-row>
@@ -49,7 +50,7 @@ export default {
 
   computed: {
     size(){
-      return this.windowWidth * 0.7
+      return this.windowWidth * 0.8
     }
   },
   methods: {

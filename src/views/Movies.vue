@@ -21,7 +21,7 @@
                 :name="item.title"
                 :date="item.release_date"
                 aspect="2/3"
-                width="130"
+                width="132"
                 :to="`/movie/`+item.id"
             /> 
           </v-row>

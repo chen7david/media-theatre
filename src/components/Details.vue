@@ -12,8 +12,9 @@
             <hr class=" mb-5 orange">
             <ReadMore
                 :text="overview" 
-                limit="200"
+                :limit="textlimit"
             />
+            <slot name="content"></slot>
         </v-col>
     </v-row>
     </v-sheet>
@@ -32,7 +33,8 @@ export default {
         overview: null,
         state: null,
         width: null,
-        date: null
+        date: null,
+        textlimit: null
     },
     computed: {
         year(){ return new Date(this.date).getFullYear().toString() }
