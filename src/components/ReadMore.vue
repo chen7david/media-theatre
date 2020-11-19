@@ -1,5 +1,5 @@
 <template>
-    <span>
+    <span v-if="text">
         <div v-if="readmore">
             {{text}}
         </div>

@@ -27,7 +27,7 @@ const responseErrorHandler = async (error) => {
 
 
 export default (options = {}) => {
-    let config = { timeout: 9000 }
+    let config = { timeout: 12000 }
 
     Object.assign(config, options)
     const http = axios.create(config)

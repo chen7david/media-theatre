@@ -2,7 +2,7 @@
   <v-container>
     <h1>Documentation</h1>
     <hr class="my-5">
-    <p><v-chip>{{config.api.meta}}</v-chip></p>
+    <p><v-chip>{{$config.api.meta}}</v-chip></p>
   <v-simple-table>
     <template v-slot:default>
       <thead>
@@ -89,11 +89,7 @@ export default {
       
     ],
   }),
-  computed: {
-    config(){
-      return this.$config
-    }
-  }
+  computed: {}
 };
 
 </script>

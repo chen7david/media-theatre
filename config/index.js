@@ -1,6 +1,7 @@
 export default {
     api: {
-        meta: 'http://aox.hopto.org:8555',
-        file: 'http://aox.hopto.org:9000'
+        media: 'http://aox.hopto.org:8555',
+        meta: 'http://aox.hopto.org:8000',
+        file: 'http://aox.hopto.org:9000',
     }
 }

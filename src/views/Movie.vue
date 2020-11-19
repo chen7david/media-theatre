@@ -5,10 +5,10 @@
             <v-row justify="center"> 
                 <v-col align="center" lg="9" sm="12" xs="12">
                   <media-player
-                      baseURL="http://aox.hopto.org:9000/movies"
+                      :baseURL="$config.api.file+`/movies`"
                       :videos="item.videos"
                       :subtitles="item.subtitles"
-                      :poster="`http://aox.hopto.org:8000/image/w1280`+item.backdrop_path"
+                      :poster="$config.api.meta+`/image/w1280`+item.backdrop_path"
                       aspect="16/9"
                       :width="size"        
                   />

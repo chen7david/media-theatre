@@ -5,7 +5,7 @@
         color="black"
     >
         <video
-            v-if="videos && videos[0]" 
+            v-if="videos && videos[0]"
             controls 
             controlsList="nodownload"
             crossorigin="anonymous"
