@@ -21,7 +21,7 @@
                 :name="item.name"
                 :date="item.first_air_date"
                 aspect="2/3"
-                width="132"
+                :width="posterWidth"
                 :to="`/show/`+item.id"
             /> 
           </v-row>
@@ -38,11 +38,22 @@ export default {
   data: () => ({
     isLoading: false,
     movies: [],
-    filter: null
+    filter: null,
+    windowWidth: null
   }),
   components: {
     Poster
   }, 
+  computed: {
+    size(){
+      const x = this.windowWidth * 0.8
+      const limit = 1200
+      return x < limit ? x : limit
+    },
+    posterWidth(){
+      return this.size < 500 ? 130 : 170
+    }
+  },
   methods: {
     async load(func, params = {}){
       this.isLoading = true
@@ -60,16 +71,23 @@ export default {
     },
     items(){
       return this.filter ? this.movies.filter(m => m.name.toLowerCase().includes(this.filter)) : this.movies
-    }
+    },
+    setScreen(){
+      this.windowWidth = this.$vuetify.breakpoint.width
+    },
   },
   async mounted(){
     await this.load(this.getMovies)
     this.$root.$on('search-shows', (e) => {
           this.filter = e ? this.filter = e.toLowerCase() : null
     })
+    this.setScreen()
   },
   beforeDestroy() {
     this.$root.$off('search-shows')
-},
+  },
+  created(){
+    window.addEventListener('resize',this.setScreen)
+  }
 }
 </script>
