@@ -50,7 +50,7 @@ export default {
       return x < limit ? x : limit
     },
     posterWidth(){
-      return this.size < 500 ? 130 : 170
+      return this.size < 900 ? 130 : 170
     }
   },
   methods: {
