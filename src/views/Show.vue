@@ -4,13 +4,11 @@
           <v-col cols="12">
             <v-row justify="center"> 
                 <v-col align="center" lg="9" sm="12" xs="12">
-                  <Details
-                    :width="size"
-                    :name=" episode.name || item.name"
-                    :date="item.first_air_date"
-                    
-                    textlimit="0"
-                  />
+                  <v-sheet class="text-left" :width="size">
+                    <v-btn router to="/shows" class="ma-3" icon>
+                      <v-icon>mdi-chevron-left</v-icon>
+                    </v-btn>
+                  </v-sheet>
                   <media-player
                       :baseURL="$config.api.file+`/shows`"
                       :videos="episode.videos"
@@ -29,7 +27,6 @@
 
 <script>
 import MediaPlayer from './../components/MediaPlayer';
-import Details from './../components/Details';
 import SeasonsTable from './../components/SeasonsTable';
 
 
@@ -38,7 +35,6 @@ export default {
 
   components: {
     'media-player' : MediaPlayer,
-    Details,
     SeasonsTable
   },
 

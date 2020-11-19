@@ -6,7 +6,6 @@
             <v-list-item-content>
                 <v-list-item-title class="text-h5">{{name}}</v-list-item-title>
                 <v-list-item-subtitle class="text-6 blue-grey--text">{{year}}</v-list-item-subtitle>
-                
             </v-list-item-content>
             </v-list-item>
             <hr class=" mb-5 orange">

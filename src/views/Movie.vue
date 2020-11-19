@@ -4,6 +4,11 @@
           <v-col cols="12">
             <v-row justify="center"> 
                 <v-col align="center" lg="9" sm="12" xs="12">
+                  <v-sheet class="text-left" :width="size">
+                    <v-btn router to="/movies" class="ma-3" icon>
+                      <v-icon>mdi-chevron-left</v-icon>
+                    </v-btn>
+                  </v-sheet>
                   <media-player
                       :baseURL="$config.api.file+`/movies`"
                       :videos="item.videos"
