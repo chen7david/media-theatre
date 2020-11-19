@@ -6,10 +6,12 @@ import vuetify from './plugins/vuetify';
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
 import http from './plugins/http'
+import config from './../config'
 
 Vue.config.productionTip = false
+Vue.prototype.$config = config
 Vue.prototype.$http = http({
-  baseURL: 'http://aox.hopto.org:8555'
+  baseURL: config.api.meta
 })
 
 new Vue({
