@@ -5,6 +5,7 @@
         color="black"
     >
         <video
+            id="player"
             v-if="videos && videos[0]"
             controls 
             controlsList="nodownload"
@@ -27,6 +28,8 @@
                 default
             >
         </video>
+        <h1 v-else>This video was not found!</h1>
+
     </v-sheet>
 </template>
 
@@ -63,7 +66,7 @@ export default {
             console.log({url})
             return this.baseURL ? this.baseURL + url : url
         }
-    }
+    }, 
 }
 </script>
 

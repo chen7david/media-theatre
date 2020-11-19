@@ -10,6 +10,7 @@
                     </v-btn>
                   </v-sheet>
                   <media-player
+                      ref="media"
                       :baseURL="$config.api.file+`/shows`"
                       :videos="episode.videos"
                       :subtitles="episode.subtitles"
@@ -31,7 +32,7 @@ import SeasonsTable from './../components/SeasonsTable';
 
 
 export default {
-  name: 'Movies',
+  name: 'Show',
 
   components: {
     'media-player' : MediaPlayer,
@@ -65,8 +66,10 @@ export default {
     setScreen(){
       this.windowWidth = this.$vuetify.breakpoint.width
     },
-    setEpisode(ep){
+    async setEpisode(ep){
       this.episode = ep
+      this.$refs.media.$refs.player
+      // await video.play()
     }
   },
   async mounted(){

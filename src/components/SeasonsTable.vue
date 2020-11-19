@@ -18,9 +18,6 @@
                             <th class="text-left">
                                 Name
                             </th>
-                            <!-- <th class="text-left">
-                                Description
-                            </th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -29,9 +26,11 @@
                                 :key="episode.id"
                                 @click="select(episode)"
                             >
-                                <td>{{ episodeId(episode) }}</td>
+                                <td>
+                                    <v-icon small v-if="selected.id == episode.id">mdi-play</v-icon>
+                                    {{ episodeId(episode) }}
+                                </td>
                                 <td>{{ episode.name }}</td>
-                                <!-- <td><ReadMore :text="episode.overview" limit="100"/></td> -->
                             </tr>
                         </tbody>
                         </template>
@@ -60,7 +59,7 @@ export default {
         isLoading: false,
         tab: null,
         seasonTabMap: [],
-        item: {}
+        selected: {}
     }),
     computed: {
         name(){
@@ -104,6 +103,7 @@ export default {
             await this.updateSeason(s + 1)
         },
         select(item){
+            this.selected = item
             this.$emit('selected', item)
         },
     },

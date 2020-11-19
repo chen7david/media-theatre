@@ -34,7 +34,7 @@
 import Poster from '@/components/Poster.vue'
 
 export default {
-  name: 'Home',
+  name: 'Movies',
   data: () => ({
     isLoading: false,
     movies: [],

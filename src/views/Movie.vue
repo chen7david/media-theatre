@@ -37,7 +37,7 @@ import Details from './../components/Details';
 
 
 export default {
-  name: 'Movies',
+  name: 'Movie',
 
   components: {
     'media-player' : MediaPlayer,
