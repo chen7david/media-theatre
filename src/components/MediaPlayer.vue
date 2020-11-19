@@ -55,7 +55,7 @@ export default {
                 nl: 'Dutch',
                 de: 'German',
                 fr: 'French',
-                sp: 'Spanish'
+                es: 'Spanish'
             }
             return map[lang] || 'unknown'
         },

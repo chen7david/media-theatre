@@ -52,7 +52,7 @@
                 solo
                 filled
                 rounded
-                append-inner-icon="mdi-movie"
+                append-inner-icon="mdi-magnify"
                 placeholder="Search..."
                 dense
                 clearable
@@ -86,11 +86,6 @@ export default {
                 name: 'Shows',
                 icon: 'mdi-monitor',
                 to: '/shows'
-            },
-            {
-                name: 'Search',
-                icon: 'mdi-magnify',
-                to: '/search'
             },
             {
                 name: 'Documentation',
