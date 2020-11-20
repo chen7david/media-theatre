@@ -17,7 +17,7 @@
             <Poster
                 v-for="item of items()"
                 :key="item.id"
-                :src="`http://aox.hopto.org:8000/image/w342`+item.poster_path"
+                :src="$config.api.meta+`/image/w342`+item.poster_path"
                 :name="item.name"
                 :date="item.first_air_date"
                 aspect="2/3"
