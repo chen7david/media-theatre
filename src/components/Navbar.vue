@@ -43,11 +43,12 @@
         <v-app-bar
             app
             dark
-        >
+        >   
             <v-app-bar-nav-icon @click="drawer = !drawer"/>
+            <v-spacer></v-spacer>
             <v-text-field
                 v-if="isSearchable"
-                class="mt-6 mx-3"
+                class="mt-6 mx-3 shrink"
                 light
                 solo
                 filled
@@ -59,7 +60,6 @@
                 v-model="phrase"
             >
             </v-text-field>
-            <v-spacer></v-spacer>
             <v-btn tile v-if="false" router to="/login">Login</v-btn>
             <v-btn tile router to="/register">Register</v-btn>
         </v-app-bar>

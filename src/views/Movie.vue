@@ -56,7 +56,7 @@ export default {
   computed: {
     size(){
       const x = this.windowWidth * 0.9
-      const limit = 1200
+      const limit = 900
       return x < limit ? x : limit
     }
   },
